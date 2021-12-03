@@ -8,6 +8,7 @@ import android.net.Uri;
 import androidx.collection.ArrayMap;
 import android.text.TextUtils;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -71,7 +72,7 @@ public class ListDocumentHolder extends DocumentHolder {
         final RootsCache roots = DocumentsApplication.getRootsCache(context);
 
         mDoc.updateFromCursor(cursor, getCursorString(cursor, RootCursorWrapper.COLUMN_AUTHORITY));
-
+        Log.e("tag===",mDoc.toString());
         if (state.action == ACTION_BROWSE) {
             if (null != iconView) {
                 iconView.setOnClickListener(this);

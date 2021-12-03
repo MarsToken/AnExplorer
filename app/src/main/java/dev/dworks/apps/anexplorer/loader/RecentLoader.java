@@ -52,6 +52,7 @@ import dev.dworks.apps.anexplorer.misc.ProviderExecutor;
 import dev.dworks.apps.anexplorer.misc.RootsCache;
 import dev.dworks.apps.anexplorer.misc.Utils;
 import dev.dworks.apps.anexplorer.model.DirectoryResult;
+import dev.dworks.apps.anexplorer.model.DocumentInfo;
 import dev.dworks.apps.anexplorer.model.DocumentsContract;
 import dev.dworks.apps.anexplorer.model.DocumentsContract.Document;
 import dev.dworks.apps.anexplorer.model.DocumentsContract.Root;
@@ -59,6 +60,7 @@ import dev.dworks.apps.anexplorer.model.RootInfo;
 
 import static dev.dworks.apps.anexplorer.BaseActivity.State.SORT_ORDER_LAST_MODIFIED;
 import static dev.dworks.apps.anexplorer.BaseActivity.TAG;
+import static dev.dworks.apps.anexplorer.model.DocumentInfo.getCursorString;
 
 public class RecentLoader extends AsyncTaskLoader<DirectoryResult> {
     private static final boolean LOGD = true;
@@ -136,7 +138,8 @@ public class RecentLoader extends AsyncTaskLoader<DirectoryResult> {
             try {
                 client = DocumentsApplication.acquireUnstableProviderOrThrow(
                         getContext().getContentResolver(), authority);
-
+                // 核心代码 uriString:content://dev.dworks.apps.anexplorer.nonmedia.documents/root/document_root/recent  authority:dev.dworks.apps.anexplorer.nonmedia.documents
+                // .mdeia.documents/root/images_root/recent authority:media.documents
                 final Uri uri = DocumentsContract.buildRecentDocumentsUri(authority, rootId);
                 final Cursor cursor = client.query(
                         uri, null, null, null, DirectoryLoader.getQuerySortOrder(mSortOrder));
@@ -263,7 +266,12 @@ public class RecentLoader extends AsyncTaskLoader<DirectoryResult> {
         };
 
         result.cursor = sorted;
-
+        Log.e(TAG + "====", result.cursor.getCount() + "个");
+        while (result.cursor.moveToNext()) {
+            DocumentInfo documentInfo = new DocumentInfo();
+            documentInfo.updateFromCursor(result.cursor, getCursorString(result.cursor, RootCursorWrapper.COLUMN_AUTHORITY));
+            Log.e(TAG + "====", documentInfo.toString());
+        }
         return result;
     }
 

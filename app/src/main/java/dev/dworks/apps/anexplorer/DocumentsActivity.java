@@ -677,7 +677,7 @@ public class DocumentsActivity extends BaseActivity implements MenuItem.OnMenuIt
     public void setRootsDrawerOpen(boolean open) {
         if (!mShowAsDialog) {
             if (open) {
-                mDrawerLayoutHelper.openDrawer(mRootsContainer);
+                mDrawerLayoutHelper.openDrawer(mRootsContainer); // open recent
             } else {
                 mDrawerLayoutHelper.closeDrawer(mRootsContainer);
             }

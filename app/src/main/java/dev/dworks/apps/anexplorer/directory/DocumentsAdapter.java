@@ -134,6 +134,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<BaseHolder> {
                 return new MessageHolder(mEnv, mEnv.getContext(), parent);
             }
             case ITEM_TYPE_HEADER: {
+
                 return new MessageHolder(mEnv, mEnv.getContext(), parent, R.layout.item_message_header);
             }
         }

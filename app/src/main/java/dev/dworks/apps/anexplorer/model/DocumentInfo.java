@@ -217,7 +217,19 @@ public class DocumentInfo implements Durable, Parcelable {
 
     @Override
     public String toString() {
-        return "Document{docId=" + documentId + ", name=" + displayName + "}";
+        return "DocumentInfo{" +
+                "authority='" + authority + '\'' +
+                ", documentId='" + documentId + '\'' +
+                ", mimeType='" + mimeType + '\'' +
+                ", displayName='" + displayName + '\'' +
+                ", lastModified=" + lastModified +
+                ", flags=" + flags +
+                ", summary='" + summary + '\'' +
+                ", size=" + size +
+                ", icon=" + icon +
+                ", path='" + path + '\'' +
+                ", derivedUri=" + derivedUri +
+                '}';
     }
 
     public boolean isCreateSupported() {

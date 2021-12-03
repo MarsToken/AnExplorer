@@ -33,6 +33,10 @@ android {
         buildConfigField "String", "BOX_CLIENT_KEY",  "$props.BOX_CLIENT_KEY"
         buildConfigField "String", "PLAYSTORE_LICENSE_KEY",  "$props.PLAYSTORE_LICENSE_KEY"
         buildConfigField "String", "MERCHANT_ID",  "$props.MERCHANT_ID"
+        multiDexEnabled true
+        ndk {
+            abiFilters 'armeabi'
+        }
     }
     signingConfigs {
         release
@@ -133,14 +137,15 @@ dependencies {
     wearImplementation 'androidx.wear:wear:1.0.0'
     wearImplementation 'androidx.preference:preference:1.0.0'
     wearCompileOnly 'com.google.android.wearable:wearable:2.3.0'
+    implementation 'com.android.support:multidex:1.0.3'
 }
 
-android.signingConfigs.release.storeFile rootProject.file(props.keyStore)
-android.signingConfigs.release.storePassword props.keyStorePassword
-android.signingConfigs.release.keyAlias props.keyAlias
-android.signingConfigs.release.keyPassword props.keyAliasPassword
+//android.signingConfigs.release.storeFile rootProject.file(props.keyStore)
+//android.signingConfigs.release.storePassword props.keyStorePassword
+//android.signingConfigs.release.keyAlias props.keyAlias
+//android.signingConfigs.release.keyPassword props.keyAliasPassword
 
 if (getGradle().getStartParameter().getTaskRequests().toString().contains("Free")) {
-    apply plugin: 'com.google.gms.google-services'
-    apply plugin: 'io.fabric'
+//    apply plugin: 'com.google.gms.google-services'
+//    apply plugin: 'io.fabric'
 }
